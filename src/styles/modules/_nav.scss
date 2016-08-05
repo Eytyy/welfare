@@ -1,0 +1,121 @@
+.map__nav {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 14.9em;
+  background: rgba(0, 0, 0, 0.8);
+  border-top: 0.4em solid $red;
+}
+.map__nav__item-wrapper {
+  display: inline-block;
+  height: 100%;
+  width: 14%;
+  &.active {
+    width: 100%;
+  }
+}
+.map__nav__item__inner,
+.map__nav__item--layer,
+.map__nav__item--project {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  color: #FFF;
+}
+.map__nav__item__inner {
+  position: absolute;;
+  z-index: -1;
+  width: 84%;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform 1s ease-in-out;
+  .active & {
+    position: relative;
+    z-index: 1;
+    overflow-x: scroll;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.map__nav__item--layer {
+  width: 100%;
+  padding: 3em 3em 0;
+  border-right: 1px solid $red;
+  font-family: $font;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  .active & {
+    width: 14%;
+    background-color: #373535;
+    color: $red;
+  }
+}
+.map__nav__item__icon {
+  display: block;
+  background-position: center bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0 auto 1em;
+  height: 52px;
+  transition: all 0.2s ease-in-out;
+}
+
+.map__nav__item__name {
+  font-size: 1.4em;
+}
+.map__nav__item--projects {
+  .map__nav__item__icon {
+    background-image: url('../images/our-projects-icon.svg');
+    width: 51px;
+    .active & {
+      background-image: url('../images/our-projects-icon--active.svg');
+    }
+  }
+}
+
+.map__nav__item--buildings {
+  .map__nav__item__icon {
+    background-image: url('../images/general-buildings-icon.svg');
+    width: 33px;
+    .active & {
+      background-image: url('../images/general-buildings-icon--active.svg');
+    }
+  }
+}
+
+.map__nav__item--housing {
+  .map__nav__item__icon {
+    background-image: url('../images/housing-study-icon.svg');
+    width: 59px;
+    .active & {
+      background-image: url('../images/housing-study-icon--active.svg');
+    }
+  }
+}
+
+.map__nav__item--project {
+  width: 19%;
+  padding: 4em 1em 0;
+  cursor: pointer;
+  &:hover, &.active {
+    background-color: #4F545D;
+  }
+}
+.map__nav__item--project {
+  &:not(last-child) {
+    border-right: 1px solid $gold;
+  }
+}
+.map__nav__item__title {
+  font-size: 1.7em;
+  line-height: 1.2em;
+  white-space: normal;
+  text-transform: capitalize;
+}

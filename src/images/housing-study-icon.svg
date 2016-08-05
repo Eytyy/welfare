@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="61px" height="48px" viewBox="0 0 61 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>HOUSING CONDITIONS</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Option2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="main-screen-copy" transform="translate(-495.000000, -650.000000)" stroke="#FCCA34">
+            <g id="HOUSING-CONDITIONS" transform="translate(496.000000, 651.000000)">
+                <polygon id="Shape" points="16 46 16 23 43 23 43 46 34 46 34 34.5 25 34.5 25 46"></polygon>
+                <polygon id="Shape" points="30 21.8933333 12 21.8933333 30 14 48 22"></polygon>
+                <rect id="Rectangle-path" x="26" y="35" width="3" height="10"></rect>
+                <rect id="Rectangle-path" x="30" y="35" width="3" height="10"></rect>
+                <polyline id="Shape" points="21 22 30 14 39 22"></polyline>
+                <ellipse id="Oval" cx="28.2251908" cy="39.2254902" rx="0.22519084" ry="0.225490196"></ellipse>
+                <ellipse id="Oval" cx="31.2251908" cy="39.2254902" rx="0.22519084" ry="0.225490196"></ellipse>
+                <path d="M51,29.8518555 C51,17.783409 41.3741221,8 29.5,8 C17.6258779,8 8,17.783409 8,29.8518555" id="Oval-5"></path>
+                <path d="M55,29.8249202 C55,15.5622106 43.5832611,4 29.5,4 C15.4167389,4 4,15.5622106 4,29.8249202" id="Oval-5"></path>
+                <path d="M59,29.7979848 C59,13.3410122 45.7924001,0 29.5,0 C13.2075999,0 0,13.3410122 0,29.7979848" id="Oval-5-Copy"></path>
+            </g>
+        </g>
+    </g>
+</svg>

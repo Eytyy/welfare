@@ -3,7 +3,6 @@ import gulpHelp from 'gulp-help';
 import data from 'gulp-data';
 import plumber from 'gulp-plumber';
 import notify from 'gulp-notify';
-import render from 'gulp-nunjucks-render';
 import eslint from 'gulp-eslint';
 import babel from 'gulp-babel';
 import sass from 'gulp-sass';
@@ -19,20 +18,20 @@ const reload = browserSync.reload;
 
 const root = {
   src: './src',
-  dest: './dest',
+  dest: './app',
 };
 
 const paths = {
   styles: {
-    src: `${root.src}/sass/**/*.scss`,
-    dest: `${root.dest}/css/`,
+    src: `${root.src}/styles/**/*.scss`,
+    dest: `${root.dest}/styles/`,
   },
   scripts: {
-    src: `${root.src}/js/**/*.js`,
-    dest: `${root.dest}/js/`,
+    src: `${root.src}/scripts/**/*.js`,
+    dest: `${root.dest}/scripts/`,
   },
   html: {
-    src: `${root.src}/html/**/*.html`,
+    src: `${root.src}/index.html`,
     dest: `${root.dest}/`,
   },
   fonts: {
@@ -69,17 +68,11 @@ gulp.task('copyData', 'copy data from src to dest', () => {
 });
 
 // Start of HTML related tasks --------------------------------------------
-const dataPath = `${root.src}/data`;
-const templatesPath = `${root.src}/html`;
+// const dataPath = `${root.src}/data`;
+// const templatesPath = `${root.src}/html`;
 
 gulp.task('html', 'copy HTML files and move to dest folder', () => {
   gulp.src(paths.html.src)
-    .pipe(data(() => ({
-      global: require(`${dataPath}/data.json`),
-    })))
-    .pipe(render({
-      path: templatesPath,
-    }))
     .pipe(gulp.dest(paths.html.dest))
     .pipe(reload({ stream: true }));
 });
@@ -89,7 +82,7 @@ gulp.task('html', 'copy HTML files and move to dest folder', () => {
 // Start of Images related tasks --------------------------------------------
 gulp.task('images', 'Optimize images and move to dest folder', () => {
   gulp.src(paths.images.src)
-    .pipe(changed(paths.dest)) // ignore unchanged files
+    .pipe(changed(paths.images.dest)) // ignore unchanged files
     .pipe(imagemin()) // optimize
     .pipe(gulp.dest(paths.images.dest))
     .pipe(reload({ stream: true }));
@@ -150,7 +143,7 @@ gulp.task('watch', 'Watcher task', () => {
 // Start of serve related tasks -------------------------------------------
 gulp.task('serve', 'serve resources', () => {
   browserSync({
-    server: './dest',
+    server: './app',
   });
 });
 // End of serve related tasks ---------------------------------------------

@@ -1,0 +1,31 @@
+/* utils/_variables.scss */
+
+// Fonts Variables
+$font: 'FiraSans';
+$font__light: 'FiraSans-Light';
+
+/* Colors Variables */
+$link__color: rgba(88, 75, 97, 1);
+$link__color--active: rgba(0, 0, 0, 1);
+
+$red: #D62D4C;
+$gold: #FCCA34;
+$active_block: #4F545D;
+
+// Layout Variables
+$gutter: 3em;
+$vertical-space: 6em;
+
+$compact-wrapper-width: 97.2em;
+$large-wrapper-width: 126em;
+$full-wrapper-width: 133em;
+$max-wrapper-width: 144em;
+
+// Media Queries variables
+$breakpoints: (
+  'small'   : 320px,
+  'compact' : 568px,
+  'medium'  : 760px,
+  'large'   : 1024px,
+  'xlarge'  : 1280px
+);

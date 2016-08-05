@@ -1,0 +1,13 @@
+// Fonts
+@font-face {
+  font-family: $font;
+  src: url('../fonts/FiraSans-Regular.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: $font__light;
+  src: url('../fonts/FiraSans-Light.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}

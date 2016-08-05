@@ -1,5 +1,9 @@
 {
   "parser": "babel-eslint",
+  "globals": {
+    "google": true,
+    "welfare": true
+  },
   "rules": {
     "quotes": [
       2,

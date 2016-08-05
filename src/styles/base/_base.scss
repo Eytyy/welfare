@@ -1,0 +1,21 @@
+/* base/_base.scss */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: $font;
+  font-size: 62.5%;
+  line-height: 1.35em;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+}
+body, html, main, #welfare, #map {
+  height: 100%;
+}
+
+/* base/_base.scss */
+
+* {
+  box-sizing: border-box;
+}
