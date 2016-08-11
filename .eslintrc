@@ -2,7 +2,8 @@
   "parser": "babel-eslint",
   "globals": {
     "google": true,
-    "welfare": true
+    "welfare": true,
+    "Handlebars": true
   },
   "rules": {
     "quotes": [

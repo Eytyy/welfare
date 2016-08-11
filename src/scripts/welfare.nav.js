@@ -1,12 +1,5 @@
 welfare.nav = (() => {
-  const configMap = {
-    template: function() {
-      const mapNav = document.createElement('nav');
-      mapNav.classList.add('map__nav');
-      mapNav.id = 'map_nav';
-      return mapNav;
-    },
-  };
+  const configMap = {};
   const stateMap = {
     $container: null,
     activeLayer: null,
@@ -26,7 +19,7 @@ welfare.nav = (() => {
     };
   };
 
-  const setNavMap = (layers) => {
+  const setNavMap = layers => {
     Object.keys(layers).forEach(key => {
       const obj = {};
       obj.populate = false;
@@ -36,116 +29,96 @@ welfare.nav = (() => {
     });
   };
 
-  const setMainNav = (layers) => {
-    const frag = document.createDocumentFragment();
+  const setMainNav = layers => {
+    const tpl = Handlebars.templates['nav.tpl.hbs'](layers);
 
-    Object.keys(layers).forEach(key => {
-      const item = layers[key];
-      const mapNavItemWrapper = document.createElement('div');
-      const mapNavItem = document.createElement('a');
-      const mapNavItemIcon = document.createElement('i');
-      const mapNavItemTitle = document.createElement('span');
+    stateMap.$container.insertAdjacentHTML('beforeend', tpl);
 
-      mapNavItemWrapper.classList.add('map__nav__item-wrapper', `map__nav__item-wrapper--${key}`);
-
-      mapNavItem.classList.add(
-        'map__nav__item',
-        'map__nav__item--layer',
-        `map__nav__item--${item.name}`
-      );
-
-      mapNavItemIcon.classList.add('map__nav__item__icon');
-      mapNavItemTitle.innerHTML = `${item.title}`;
-      mapNavItemTitle.classList.add('map__nav__item__name');
-      mapNavItem.href = `#${item.name}`;
-
-      mapNavItem.appendChild(mapNavItemIcon);
-      mapNavItem.appendChild(mapNavItemTitle);
-      mapNavItemWrapper.appendChild(mapNavItem);
-
-      frag.appendChild(mapNavItemWrapper);
-    });
-    domMap.$nav.appendChild(frag);
     domMap.$navItemWrapper = document.querySelectorAll('.map__nav__item-wrapper');
     domMap.$navItem = document.querySelectorAll('.map__nav__item--layer');
   };
 
-  const removeDuplicates = data => {
-    const obj = {};
-    for (const el of data) {
-      const item = el.getProperty('RelatedEnglishTitle');
-      if (obj[item]) continue;
-      obj[item] = el;
-    }
-    filtered[stateMap.activeLayer] = obj;
-    return obj;
-  };
-
   const setLayerNav = layer => {
+    let filteredData;
     const data = layer;
     const navWrapper = document.createElement('div');
-    const navFrag = document.createDocumentFragment();
-    let filteredData;
+    navWrapper.classList.add('map__nav__item__inner');
 
-    const buildNodes = (project, idx) => {
-      // NOTE: some entries don't have coordinates, clean json export
-      if (project.getGeometry().getAt(0) === undefined) {
-        console.log(project.getProperty('RelatedEnglishTitle'), '[Coordinates are missing].');
-        return undefined;
+    // Function to remove duplicates from data object
+    const removeDuplicates = () => {
+      const obj = {};
+      for (const el of data) {
+        const category = el.getProperty('CatAName');
+        const item = el.getProperty('RelatedEnglishTitle');
+
+        if (!obj[category]) {
+          obj[category] = {};
+        }
+        if (!obj[category][item]) {
+          obj[category][item] = el;
+        }
       }
+      filtered[stateMap.activeLayer] = obj;
+      return obj;
+    };
 
-      // Construct the navigation item DOM element
-      const navItem = document.createElement('span');
-      const navItemTitleWrapper = document.createElement('span');
-      const navItemTitle = document.createTextNode(idx);
+    const buildNode = (catName, catData) => {
+      const $catWrapper = document.createElement('div');
+      $catWrapper.classList.add('map__nav__item--category', `map__nav__item--category--${catName}`);
+      const $iconWrapper = Handlebars.templates['nav-cat.tpl.hbs']({ title: catName });
+      $catWrapper.insertAdjacentHTML('beforeend', $iconWrapper);
 
-      navItem.classList.add('map__nav__item', 'map__nav__item--project');
-      navItem.dataset.target = idx;
-      navItemTitleWrapper.classList.add('map__nav__item__title');
-      navItemTitleWrapper.appendChild(navItemTitle);
-      navItem.appendChild(navItemTitleWrapper);
-
-      // Return the navigation item element
-      return navItem;
+      Object.keys(catData).forEach(key => {
+        if (catData[key].getGeometry().getAt(0)) {
+          const id = catData[key].getProperty('RelatedEnglishTitle');
+          const item = Handlebars.templates['nav-layer.tpl.hbs']({ title: id, cat: catName });
+          $catWrapper.insertAdjacentHTML('beforeend', item);
+        } else {
+          console.log('no geometry');
+        }
+      });
+      return $catWrapper;
     };
 
     // filter duplicates
     if (!filtered[stateMap.activeLayer]) {
-      filteredData = removeDuplicates(data);
+      filteredData = removeDuplicates();
     }
 
+    // Loop through data to add an element/link for each project
+    // in the layer navigation
     Object.keys(filteredData).forEach(key => {
-      // use project name as the project id, this will be used as the data target
-      // attribute value for the link, and the property for the project in the project's
-      // map object
-      const projectId = filteredData[key].getProperty('RelatedEnglishTitle');
-
-      // Build the projects navigation item
-      const navItem = buildNodes(filteredData[key], projectId);
-      if (navItem) {
-        navFrag.appendChild(navItem);
-      }
+      // Build the projects' navigation item
+      const navGroup = buildNode(key, filteredData[key]);
+      navWrapper.appendChild(navGroup);
     });
 
-    navWrapper.classList.add('map__nav__item__inner');
-    navWrapper.appendChild(navFrag);
     document.querySelector(`.map__nav__item-wrapper--${stateMap.activeLayer}`)
       .appendChild(navWrapper);
   };
 
+  // Updates The Main Navigation Items of first Level
+  // ex: our projects, public buidlings ..etc
   const updateMainNav = () => {
     const data = navMap[stateMap.activeLayer].data;
     const populated = navMap[stateMap.activeLayer].populated;
     const activeEl = document.querySelector(`.map__nav__item-wrapper--${stateMap.activeLayer}`);
-    console.log(populated);
+
+    // If layer has data and the navigation is not populated with layer links
     if (!populated && data) {
+      // Set Layer navigation to populate the navigation
       setLayerNav(data);
       navMap[stateMap.activeLayer].populated = true;
     }
+    // Remove active class from main navigation items
     for (const item of domMap.$navItemWrapper) {
       item.classList.remove('active');
     }
+    // Check if the map layer is visible
     const isLayerActive = welfare.map.isLayerVisible(stateMap.activeLayer);
+    // if active and previous layers are not the same; it's a new layer that we want to show
+    // if active and previous layers are the same and the layer is visible it means we are just
+    // toggling visibility of layer
     if (stateMap.activeLayer !== stateMap.previousLayer ||
       (stateMap.activeLayer === stateMap.previousLayer && isLayerActive)) {
       activeEl.classList.add('active');
@@ -157,7 +130,14 @@ welfare.nav = (() => {
     stateMap.previousLayer = event.detail.previousLayer;
   };
 
-  const onUpdateProject = event => {
+  const toggleLayerLinks = event => {
+    if (event.type === 'layerStateUpdate') {
+      if (stateMap.activeProject) {
+        stateMap.activeProject.classList.remove('active');
+      }
+      return;
+    }
+
     const project = event.detail.project.feature.getProperty('RelatedEnglishTitle');
     if (stateMap.activeProject) {
       stateMap.activeProject.classList.remove('active');
@@ -178,8 +158,12 @@ welfare.nav = (() => {
         event.target :
         event.target.parentNode;
 
-
-      const item = filtered[stateMap.activeLayer][el.dataset.target];
+      if (el.classList.contains('active')) {
+        // el.classList.remove('active');
+        // stateMap.$container.classList.remove('js-view-mode');
+        // return true;
+      }
+      const item = filtered[stateMap.activeLayer][el.dataset.cat][el.dataset.target];
       const latLngs = item.getGeometry().getAt(0).getAt(0);
 
       // Defined an object for the google.maps.MouseEvent parameter
@@ -199,14 +183,11 @@ welfare.nav = (() => {
 
   const initModule = ($container, layerObj) => {
     stateMap.$container = $container;
-    $container.appendChild(configMap.template());
-    setDOMmap();
 
     // Listen to layer state updates
     document.addEventListener('layerStateUpdate', event => {
       updateLocalLayerState(event);
       if (navMap[stateMap.activeLayer].data) {
-        console.log('update');
         updateMainNav();
       }
     });
@@ -218,6 +199,7 @@ welfare.nav = (() => {
     // Build layers navigation
     setMainNav(layerObj);
     setNavMap(layerObj);
+    domMap.$nav = document.querySelector('.map__nav');
 
     // Listen to data updates
     document.addEventListener('dataUpdate', event => {
@@ -225,7 +207,8 @@ welfare.nav = (() => {
       updateMainNav();
     });
 
-    document.addEventListener('updateProject', onUpdateProject);
+    document.addEventListener('updateProject', toggleLayerLinks);
+    document.addEventListener('layerStateUpdate', toggleLayerLinks);
 
     domMap.$nav.addEventListener('click', onLayerLinkClick, false);
   };

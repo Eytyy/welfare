@@ -8,15 +8,21 @@
   </head>
   <body>
     <main role="main">
+      <div class="logo"><img src="images/logo.svg" alt="website logo"></div>
       <div id="welfare"></div>
     </main>
-    <script src="scripts/vendor/polyfill.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIFeSNFnuXq-KGGKkqMGGmD82fugLAgi0"></script>
-    <script src="scripts/welfare.js"></script>
-    <script src="scripts/welfare.shell.js"></script>
-    <script src="scripts/welfare.map.js"></script>
-    <script src="scripts/welfare.overlay.js"></script>
-    <script src="scripts/welfare.nav.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIFeSNFnuXq-KGGKkqMGGmD82fugLAgi0"></script>
+    <script src="/scripts/vendor/polyfill.min.js"></script>
+    <script src="/scripts/vendor/handlebars.runtime.min.js"></script>
+    <script src="/templates/templates.js"></script>
+    <script src="/scripts/welfare.js"></script>
+    <script src="/scripts/welfare.util.js"></script>
+    <script src="/scripts/welfare.shell.js"></script>
+    <script src="/scripts/welfare.map.js"></script>
+    <script src="/scripts/welfare.overlay.js"></script>
+    <script src="/scripts/welfare.nav.js"></script>
+    <!-- <script src="/scripts/welfare.slider.js"></script> -->
+    <script src="/scripts/welfare.info.js"></script>
     <script>
       window.onload = function() {
         welfare.initModule(document.querySelector('#welfare'));

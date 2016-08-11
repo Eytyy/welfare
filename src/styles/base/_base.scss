@@ -14,8 +14,11 @@ body, html, main, #welfare, #map {
   height: 100%;
 }
 
-/* base/_base.scss */
-
-* {
-  box-sizing: border-box;
+.logo {
+  width: 120px;
+  height: 59px;
+  position: fixed;
+  z-index: 2;
+  top: 10px;
+  left: 10px;
 }

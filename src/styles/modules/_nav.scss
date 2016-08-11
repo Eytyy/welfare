@@ -1,60 +1,85 @@
 .map__nav {
   position: absolute;
+  z-index: 4;
   left: 0;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   height: 14.9em;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   border-top: 0.4em solid $red;
 }
 .map__nav__item-wrapper {
   display: inline-block;
   height: 100%;
-  width: 14%;
+  width: 150px;
+  transition: width 0.5s ease-in-out;
   &.active {
     width: 100%;
   }
 }
 .map__nav__item__inner,
 .map__nav__item--layer,
-.map__nav__item--project {
+.map__nav__item--project,
+.map__nav__item--category,
+.category-wrapper {
   display: inline-block;
   vertical-align: top;
   height: 100%;
+  margin-left: -1px;
   color: #FFF;
 }
 .map__nav__item__inner {
   position: absolute;;
-  z-index: -1;
-  width: 84%;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateX(-100%);
+  overflow-x: scroll;
+  width: 100%;
+  margin-left: -2px;
+  transform: translate3d(-100%, 0, 0);
   transition: transform 1s ease-in-out;
+  opacity: 0;
+  -webkit-overflow-scrolling: touch;
   .active & {
-    position: relative;
-    z-index: 1;
-    overflow-x: scroll;
+    transform: translate3d(0, 0, 0);
     opacity: 1;
-    transform: translateX(0);
   }
 }
-.map__nav__item--layer {
-  width: 100%;
+.map__nav__item--projects {
+  .map__nav__item__icon {
+    background-image: url('../images/our-projects-icon.svg');
+    width: 51px;
+  }
+}
+
+.map__nav__item--buildings {
+  .map__nav__item__icon {
+    background-image: url('../images/general-buildings-icon.svg');
+    width: 33px;
+  }
+}
+.map__nav__item--housing {
+  .map__nav__item__icon {
+    background-image: url('../images/housing-study-icon.svg');
+    width: 59px;
+  }
+}
+.map__nav__item--layer,
+.category-wrapper {
+  width: 150px;
   padding: 3em 3em 0;
-  border-right: 1px solid $red;
   font-family: $font;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   position: relative;
   z-index: 1;
+}
+
+.map__nav__item--layer {
+  border-right: 1px solid $red;
   .active & {
-    width: 14%;
-    background-color: #373535;
-    color: $red;
+    border-right: 0;
+    background-color: #2C2B2B;
   }
 }
 .map__nav__item__icon {
@@ -69,53 +94,38 @@
 
 .map__nav__item__name {
   font-size: 1.4em;
+  white-space: normal;
 }
-.map__nav__item--projects {
-  .map__nav__item__icon {
-    background-image: url('../images/our-projects-icon.svg');
-    width: 51px;
-    .active & {
-      background-image: url('../images/our-projects-icon--active.svg');
-    }
-  }
+.category-wrapper {
+  border-right: 1px solid $gold;
+  background: #373535;
+  color: $red;
 }
-
-.map__nav__item--buildings {
-  .map__nav__item__icon {
-    background-image: url('../images/general-buildings-icon.svg');
-    width: 33px;
-    .active & {
-      background-image: url('../images/general-buildings-icon--active.svg');
-    }
-  }
+.category-wrapper .map__nav__item__icon {
+  background-image: url('../images/Cultural.svg');
+  width: 28px;
 }
-
-.map__nav__item--housing {
-  .map__nav__item__icon {
-    background-image: url('../images/housing-study-icon.svg');
-    width: 59px;
-    .active & {
-      background-image: url('../images/housing-study-icon--active.svg');
-    }
-  }
-}
-
 .map__nav__item--project {
-  width: 19%;
+  width: 150px;
   padding: 4em 1em 0;
   cursor: pointer;
+  margin-left: -2px;
+  overflow: hidden;
+  &:not(last-child) {
+    border-right: 1px solid $gold;
+  }
   &:hover, &.active {
     background-color: #4F545D;
   }
 }
-.map__nav__item--project {
-  &:not(last-child) {
-    border-right: 1px solid $gold;
-  }
-}
 .map__nav__item__title {
-  font-size: 1.7em;
+  font-size: 1.6em;
   line-height: 1.2em;
   white-space: normal;
   text-transform: capitalize;
+}
+.js-view-mode {
+  .map__nav {
+    background: rgba(0, 0, 0, 1);
+  }
 }

@@ -110,6 +110,7 @@ welfare.shell = (() => {
     // then initialize both the map and navigation
     welfare.map.initModule(layersMap);
     welfare.nav.initModule($container, layersMap);
+    welfare.info.initModule($container);
 
     initLayerState(stateMap.activeLayer);
   };
