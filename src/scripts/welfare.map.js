@@ -28,7 +28,7 @@ welfare.map = (() => {
       obj.dataLayer = new google.maps.Data();
       obj.dataLayer.setStyle(configMap.mapStyles);
       obj.url = layerObj[key].url;
-      obj.eventActive = false;
+      obj.eventAdded = false;
       obj.visible = false;
       layers[key] = obj;
     });
@@ -67,7 +67,6 @@ welfare.map = (() => {
       });
 
       promise.then((features) => {
-        console.log('loaded');
         welfare.shell.updateLayerData(features);
       }).catch((err) => {
         console.log(err);
@@ -76,7 +75,6 @@ welfare.map = (() => {
     // 2. Otherwise just set the map for the active layer
     // and unset for the previous one
     if (previous && previous !== '/' && previous !== active) {
-      console.log('yo');
       layers[previous].dataLayer.setMap(null);
       layers[previous].visible = false;
     }
@@ -84,7 +82,7 @@ welfare.map = (() => {
     layers[active].visible = true;
     // 3. Check if the layer already have a click event Listeners
     // to avoid adding it more than once
-    if (!layers[active].eventActive) {
+    if (!layers[active].eventAdded) {
       // Add click listenr to layer data
       layers[active].dataLayer.addListener('click', (event) => {
         // Create custom event and pass the clicked layer data to it
@@ -96,6 +94,7 @@ welfare.map = (() => {
         // Then fire the event
         document.dispatchEvent(projectUpdateEvent);
       });
+      layers[active].eventAdded = true;
     }
     return true;
   };

@@ -6,6 +6,11 @@
     "Handlebars": true
   },
   "rules": {
+    "brace-style": [
+      "error",
+      "stroustrup",
+      { "allowSingleLine": true }
+    ],
     "quotes": [
       2,
       "single"
