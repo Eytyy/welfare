@@ -13,6 +13,8 @@ AWS.config.update({
   AWSSecretKey: process.env.AWSSecretKey
 });
 
+console.log(process.env.AWSSecretKey);
+
 const s3 = new AWS.S3();
 
 app.use(express.static('app'));
