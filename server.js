@@ -8,6 +8,11 @@ const AWS = require('aws-sdk');
 const port = process.env.PORT || 3000;
 const router = express.Router();
 
+AWS.config.update({
+  accessKeyId: process.env.AWSAccessKeyId,
+  AWSSecretKey: process.env.AWSSecretKey
+});
+
 const s3 = new AWS.S3();
 
 app.use(express.static('app'));
