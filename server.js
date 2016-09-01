@@ -16,7 +16,7 @@ app.get('/', function(req, res) {
 });
 app.get('/resources/images/:layer/:id', function(req, res) {
   let results = [];
-  const s3 = new AWS.s3();
+  const s3 = new AWS.S3();
   const params = {
     Bucket: process.env.S3_BUCKET_NAME,
     Delimiter: '/',
