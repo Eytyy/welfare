@@ -19,6 +19,8 @@ app.get('/resources/images/:layer/:id', function(req, res) {
   const s3 = new AWS.S3();
   const params = {
     Bucket: process.env.S3_BUCKET_NAME,
+    accessKeyId: process.env.AWSAccessKeyId,
+    secretAccessKey: process.env.AWSSecretKey,
     Delimiter: '/',
     Prefix: `welfare/${req.params.layer}/${req.params.id}/Photo`
   };
@@ -60,6 +62,8 @@ app.get('/resources/other/:layer/:id', function(req, res) {
   const s3 = new AWS.S3();
   const params = {
     Bucket: process.env.S3_BUCKET_NAME,
+    accessKeyId: process.env.AWSAccessKeyId,
+    secretAccessKey: process.env.AWSSecretKey,
     Delimiter: '/',
     Prefix: `welfare/${req.params.layer}/${req.params.id}/Misc`
   };
