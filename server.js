@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const glob = require('glob');
-var AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
 
 const port = process.env.PORT || 3000;
 const router = express.Router();
@@ -15,19 +15,19 @@ app.get('/', function(req, res) {
   res.end();
 });
 app.get('/resources/images/:layer/:id', function(req, res) {
-  let results = [];
-  const s3 = new AWS.s3();
-  const params = {
-    Bucket: process.env.S3_BUCKET_NAME,
-    Delimiter: '/',
-    Prefix: `welfare/${req.params.layer}/${req.params.id}/Photo`
-  };
-  s3.listObjects(params, function(err, data) {
-    if (err) {
-      console.error('There was an error reading the file!', err);
-    }
-    console.log(data);
-  });
+  // let results = [];
+  // const s3 = new AWS.s3();
+  // const params = {
+  //   Bucket: process.env.S3_BUCKET_NAME,
+  //   Delimiter: '/',
+  //   Prefix: `welfare/${req.params.layer}/${req.params.id}/Photo`
+  // };
+  // s3.listObjects(params, function(err, data) {
+  //   if (err) {
+  //     console.error('There was an error reading the file!', err);
+  //   }
+  //   console.log(data);
+  // });
 
   // const dir__name = './app'
   // const path = `http://s3.amazonaws.com/eytyy.com/welfare/${req.params.layer}/${req.params.id}/Photo`;
