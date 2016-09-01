@@ -15,19 +15,19 @@ app.get('/', function(req, res) {
   res.end();
 });
 app.get('/resources/images/:layer/:id', function(req, res) {
-  // let results = [];
-  // const s3 = new AWS.s3();
-  // const params = {
-  //   Bucket: process.env.S3_BUCKET_NAME,
-  //   Delimiter: '/',
-  //   Prefix: `welfare/${req.params.layer}/${req.params.id}/Photo`
-  // };
-  // s3.listObjects(params, function(err, data) {
-  //   if (err) {
-  //     console.error('There was an error reading the file!', err);
-  //   }
-  //   console.log(data);
-  // });
+  let results = [];
+  const s3 = new AWS.s3();
+  const params = {
+    Bucket: process.env.S3_BUCKET_NAME,
+    Delimiter: '/',
+    Prefix: `welfare/${req.params.layer}/${req.params.id}/Photo`
+  };
+  s3.listObjects(params, function(err, data) {
+    if (err) {
+      console.error('There was an error reading the file!', err);
+    }
+    console.log(data);
+  });
 
   // const dir__name = './app'
   // const path = `http://s3.amazonaws.com/eytyy.com/welfare/${req.params.layer}/${req.params.id}/Photo`;
