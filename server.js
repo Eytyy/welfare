@@ -10,10 +10,9 @@ const router = express.Router();
 
 AWS.config.update({
   accessKeyId: process.env.AWSAccessKeyId,
-  AWSSecretKey: process.env.AWSSecretKey
+  AWSSecretKey: process.env.AWSSecretKey,
+  region: 'us-west-2'
 });
-
-console.log(process.env.AWSSecretKey);
 
 const s3 = new AWS.S3();
 
