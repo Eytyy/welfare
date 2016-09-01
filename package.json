@@ -34,7 +34,8 @@
     "node": "6.2.1"
   },
   "scripts": {
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "start": "node server.js"
   },
   "private": true,
   "dependencies": {
