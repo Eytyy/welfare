@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
 });
 app.get('/resources/images/:layer/:id', function(req, res) {
   const dir__name = './app'
-  const path = `http://s3.amazonaws.com/eytyy.com/${req.params.layer}/${req.params.id}/Photo`;
+  const path = `http://s3.amazonaws.com/eytyy.com/welfare/${req.params.layer}/${req.params.id}/Photo`;
   const fullpath =  `${path}`;
 
   let results = [];
@@ -42,7 +42,7 @@ app.get('/resources/images/:layer/:id', function(req, res) {
 });
 app.get('/resources/other/:layer/:id', function(req, res) {
   // const dir__name = './app'
-  const path = `http://s3.amazonaws.com/eytyy.com//${req.params.layer}/${req.params.id}/Misc`;
+  const path = `http://s3.amazonaws.com/eytyy.com/wlfare/${req.params.layer}/${req.params.id}/Misc`;
   const fullpath =  `${path}`;
 
   let results = [];
