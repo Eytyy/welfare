@@ -8,6 +8,8 @@ const AWS = require('aws-sdk');
 const port = process.env.PORT || 3000;
 const router = express.Router();
 
+const s3 = new AWS.S3();
+
 app.use(express.static('app'));
 
 app.get('/', function(req, res) {
@@ -16,7 +18,6 @@ app.get('/', function(req, res) {
 });
 app.get('/resources/images/:layer/:id', function(req, res) {
   let results = [];
-  const s3 = new AWS.S3();
   const params = {
     Bucket: process.env.S3_BUCKET_NAME,
     Delimiter: '/',
@@ -57,7 +58,6 @@ app.get('/resources/images/:layer/:id', function(req, res) {
 });
 app.get('/resources/other/:layer/:id', function(req, res) {
   let results = [];
-  const s3 = new AWS.S3();
   const params = {
     Bucket: process.env.S3_BUCKET_NAME,
     Delimiter: '/',
