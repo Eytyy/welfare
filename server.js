@@ -27,16 +27,18 @@ app.get('/resources/images/:layer/:id', function(req, res) {
       console.error('There was an error reading the file!', err);
     }
     console.log(data);
+    results.push(data);
+    sendResponse(results);
   });
 
   // const dir__name = './app'
   // const path = `http://s3.amazonaws.com/eytyy.com/welfare/${req.params.layer}/${req.params.id}/Photo`;
   // const fullpath =  `${path}`;
 
-  // function sendResponse(results) {
-  //   res.json({ data: results});
-  //   res.end();
-  // }
+  function sendResponse(results) {
+    res.json({ data: results});
+    res.end();
+  }
 
   // fs.readdir(fullpath, function(err, data) {
   //   // If direcotry doesn't exist
@@ -66,6 +68,8 @@ app.get('/resources/other/:layer/:id', function(req, res) {
       console.error('There was an error reading the file!', err);
     }
     console.log(data);
+    results.push(data);
+    sendResponse(results);
   });
 
   // const dir__name = './app'
@@ -74,10 +78,10 @@ app.get('/resources/other/:layer/:id', function(req, res) {
   //
   // let results = [];
   //
-  // function sendResponse(results) {
-  //   res.json({ data: results});
-  //   res.end();
-  // }
+  function sendResponse(results) {
+    res.json({ data: results});
+    res.end();
+  }
   //
   // fs.readdir(fullpath, function(err, data) {
   //   // If direcotry doesn't exist
