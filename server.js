@@ -8,12 +8,6 @@ const AWS = require('aws-sdk');
 const port = process.env.PORT || 3000;
 const router = express.Router();
 
-AWS.config.update({
-  accessKeyId: process.env.AWSAccessKeyId,
-  AWSSecretKey: process.env.AWSSecretKey,
-  region: 'us-west-2'
-});
-
 const s3 = new AWS.S3();
 
 app.use(express.static('app'));
@@ -25,9 +19,7 @@ app.get('/', function(req, res) {
 app.get('/resources/images/:layer/:id', function(req, res) {
   let results = [];
   const params = {
-    Bucket: process.env.S3_BUCKET_NAME,
-    Delimiter: '/',
-    Prefix: `welfare/${req.params.layer}/${req.params.id}/Photo`
+    Bucket: process.env.S3_BUCKET_NAME
   };
   s3.listObjects(params, function(err, data) {
     if (err) {
