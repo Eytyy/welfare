@@ -54,31 +54,45 @@ app.get('/resources/images/:layer/:id', function(req, res) {
   // });
 });
 app.get('/resources/other/:layer/:id', function(req, res) {
-  // const dir__name = './app'
-  const path = `http://s3.amazonaws.com/eytyy.com/wlfare/${req.params.layer}/${req.params.id}/Misc`;
-  const fullpath =  `${path}`;
-
   let results = [];
-
-  function sendResponse(results) {
-    res.json({ data: results});
-    res.end();
-  }
-
-  fs.readdir(fullpath, function(err, data) {
-    // If direcotry doesn't exist
+  const s3 = new AWS.S3();
+  const params = {
+    Bucket: process.env.S3_BUCKET_NAME,
+    Delimiter: '/',
+    Prefix: `welfare/${req.params.layer}/${req.params.id}/Misc`
+  };
+  s3.listObjects(params, function(err, data) {
     if (err) {
       console.error('There was an error reading the file!', err);
-      sendResponse();
-      return;
     }
-    // Otherwise handle data
-    data.forEach(function(file) {
-      file = path + '/' + file;
-      results.push(file);
-    });
-    sendResponse(results);
+    console.log(data);
   });
+
+  // const dir__name = './app'
+  // const path = `http://s3.amazonaws.com/eytyy.com/wlfare/${req.params.layer}/${req.params.id}/Misc`;
+  // const fullpath =  `${path}`;
+  //
+  // let results = [];
+  //
+  // function sendResponse(results) {
+  //   res.json({ data: results});
+  //   res.end();
+  // }
+  //
+  // fs.readdir(fullpath, function(err, data) {
+  //   // If direcotry doesn't exist
+  //   if (err) {
+  //     console.error('There was an error reading the file!', err);
+  //     sendResponse();
+  //     return;
+  //   }
+  //   // Otherwise handle data
+  //   data.forEach(function(file) {
+  //     file = path + '/' + file;
+  //     results.push(file);
+  //   });
+  //   sendResponse(results);
+  // });
 });
 
 app.listen(port);
