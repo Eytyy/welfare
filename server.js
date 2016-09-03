@@ -27,6 +27,9 @@ app.get('/resources/images/:layer/:id', function(req, res) {
     Delimiter: '/',
     Prefix: `welfare/${req.params.layer}/${req.params.id}/Photo`
   };
+  console.log(req.params.layer);
+  console.log(req.params.id);
+
   s3.listObjects(s3Params, function(err, data) {
     if (err) {
       console.error('There was an error reading the file!', err);
