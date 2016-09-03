@@ -25,7 +25,7 @@ app.get('/resources/images/:layer/:id', function(req, res) {
   const s3Params = {
     Bucket: process.env.S3_BUCKET_NAME,
     Delimiter: '/',
-    Prefix: `welfare/${req.params.layer}/${req.params.id}`
+    Prefix: `welfare/`
   };
   console.log(req.params.layer);
   console.log(req.params.id);
