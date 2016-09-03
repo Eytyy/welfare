@@ -37,6 +37,7 @@ app.get('/resources/images/:layer/:id', function(req, res) {
     data.Contents.forEach(function(file) {
       console.log(file.Key);
     });
+    console.log(data.Content);
     sendResponse(data.Contents);
   });
 
