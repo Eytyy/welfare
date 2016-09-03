@@ -27,17 +27,17 @@ app.get('/resources/images/:layer/:id', function(req, res) {
     Delimiter: '/',
     Prefix: `welfare/${req.params.layer}/${req.params.id}/Photo/`
   };
-  console.log(req.params.layer);
-  console.log(req.params.id);
+  // console.log(req.params.layer);
+  // console.log(req.params.id);
 
   s3.listObjects(s3Params, function(err, data) {
     if (err) {
       console.error('There was an error reading the file!', err);
     }
-    data.Contents.forEach(function(file) {
-      console.log(file.Key);
-    });
-    console.log(data.Contents);
+    // data.Contents.forEach(function(file) {
+    //   console.log(file.Key);
+    // });
+    // console.log(data.Contents);
     sendResponse(data.Contents);
   });
 

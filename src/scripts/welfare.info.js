@@ -144,6 +144,7 @@ welfare.info = (() => {
         otherFiles: [],
       };
       console.log(allData);
+      console.log('yo');
 
       allData[0].forEach(item => {
         if (/before.jpg/i.test(item)) {
