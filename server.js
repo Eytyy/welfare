@@ -34,7 +34,7 @@ app.get('/resources/images/:layer/:id', function(req, res) {
     if (err) {
       console.error('There was an error reading the file!', err);
     }
-    console.log(data.Contents);
+    console.log(data);
     sendResponse(data.Contents);
   });
 
