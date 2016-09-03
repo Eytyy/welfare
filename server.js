@@ -8,6 +8,11 @@ const AWS = require('aws-sdk');
 const port = process.env.PORT || 3000;
 const router = express.Router();
 
+AWS.config.update({
+  accessKeyId: process.env.AWSAccessKeyId,
+  secretAccessKey: process.env.AWSSecretKey
+});
+
 const s3 = new AWS.S3();
 
 app.use(express.static('app'));
@@ -17,22 +22,18 @@ app.get('/', function(req, res) {
   res.end();
 });
 app.get('/resources/images/:layer/:id', function(req, res) {
-  let results = [];
-  const params = {
-    Bucket: process.env.S3_BUCKET_NAME
+  const s3Params = {
+    Bucket: process.env.S3_BUCKET_NAME,
+    Delimiter: '/',
+    Prefix: `welfare/${req.params.layer}/${req.params.id}/Photo`
   };
-  s3.listObjects(params, function(err, data) {
+  s3.listObjects(s3Params, function(err, data) {
     if (err) {
       console.error('There was an error reading the file!', err);
     }
-    console.log(data);
-    results.push(data);
-    sendResponse(results);
+    console.log(data.Contents);
+    sendResponse(data.Contents);
   });
-
-  // const dir__name = './app'
-  // const path = `http://s3.amazonaws.com/eytyy.com/welfare/${req.params.layer}/${req.params.id}/Photo`;
-  // const fullpath =  `${path}`;
 
   function sendResponse(results) {
     res.json({ data: results});
@@ -55,27 +56,19 @@ app.get('/resources/images/:layer/:id', function(req, res) {
   // });
 });
 app.get('/resources/other/:layer/:id', function(req, res) {
-  let results = [];
-  const params = {
+  const s3Params = {
     Bucket: process.env.S3_BUCKET_NAME,
     Delimiter: '/',
     Prefix: `welfare/${req.params.layer}/${req.params.id}/Misc`
   };
-  s3.listObjects(params, function(err, data) {
+  s3.listObjects(s3Params, function(err, data) {
     if (err) {
       console.error('There was an error reading the file!', err);
     }
-    console.log(data);
-    results.push(data);
-    sendResponse(results);
+    console.log(data.Contents);
+    sendResponse(data.Contents);
   });
 
-  // const dir__name = './app'
-  // const path = `http://s3.amazonaws.com/eytyy.com/wlfare/${req.params.layer}/${req.params.id}/Misc`;
-  // const fullpath =  `${path}`;
-  //
-  // let results = [];
-  //
   function sendResponse(results) {
     res.json({ data: results});
     res.end();
