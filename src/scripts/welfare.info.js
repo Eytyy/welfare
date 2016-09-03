@@ -143,6 +143,7 @@ welfare.info = (() => {
         miscImages: [],
         otherFiles: [],
       };
+      console.log(allData);
 
       allData[0].forEach(item => {
         if (/before.jpg/i.test(item)) {
