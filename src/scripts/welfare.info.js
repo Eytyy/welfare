@@ -136,9 +136,9 @@ welfare.info = (() => {
 
     // Fetch Project Images
     const images = fetchImages();
-    const others = fetchExtraResources();
+    // const others = fetchExtraResources();
 
-    Promise.all([images, others]).then(allData => {
+    Promise.all([images]).then(allData => {
       const obj = {
         miscImages: [],
         otherFiles: [],
