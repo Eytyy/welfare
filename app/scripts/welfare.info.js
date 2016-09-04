@@ -159,9 +159,7 @@ welfare.info = function () {
         } else if (/main.jpg/i.test(item)) {
           obj.mainImage = item;
         } else {
-          console.log(index);
-          console.log(!index === 0);
-          if (!index === 0) {
+          if (index !== 0) {
             obj.miscImages.push(item);
           }
         }
@@ -170,7 +168,7 @@ welfare.info = function () {
       console.log('links');
       console.log(allData[1]);
       allData[1].forEach(function (item, index) {
-        if (!index === 0) {
+        if (index !== 0) {
           obj.otherFiles.push(item);
         }
       });

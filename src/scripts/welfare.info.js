@@ -156,9 +156,7 @@ welfare.info = (() => {
           obj.mainImage = item;
         }
         else {
-          console.log(index);
-          console.log(!index === 0);
-          if (!index === 0) {
+          if (index !== 0) {
             obj.miscImages.push(item);
           }
         }
@@ -167,7 +165,7 @@ welfare.info = (() => {
       console.log('links');
       console.log(allData[1]);
       allData[1].forEach((item, index) => {
-        if (!index === 0) {
+        if (index !== 0) {
           obj.otherFiles.push(item);
         }
       });
