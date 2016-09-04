@@ -105,13 +105,10 @@ welfare.info = function () {
       var url = 'resources/images/' + activeLayer + '/' + data.ukey;
       var req = new XMLHttpRequest();
 
-      console.log('called fetch');
-
       return new Promise(function (resolve, reject) {
         req.open('GET', url);
 
         req.onload = function () {
-          console.log('loaded');
           var files = JSON.parse(req.response).data;
           if (!files) {
             reject('doesn\'t have images');
@@ -145,45 +142,47 @@ welfare.info = function () {
 
     // Fetch Project Images
     var images = fetchImages();
-    // const others = fetchExtraResources();
+    var others = fetchExtraResources();
 
-    Promise.all([images]).then(function (allData) {
+    Promise.all([images, others]).then(function (allData) {
       var obj = {
         miscImages: [],
         otherFiles: []
       };
       console.log(allData);
-      console.log('yo');
 
-      allData[0].forEach(function (item) {
-        if (/before.jpg/i.test(item)) {
-          obj.beforeImage = item;
-        } else if (/after.jpg/i.test(item)) {
-          obj.afterImage = item;
-        } else if (/main.jpg/i.test(item)) {
-          obj.mainImage = item;
-        } else {
-          obj.miscImages.push(item);
-        }
-      });
+      // allData[0].forEach(item => {
+      //   if (/before.jpg/i.test(item)) {
+      //     obj.beforeImage = item;
+      //   }
+      //   else if (/after.jpg/i.test(item)) {
+      //     obj.afterImage = item;
+      //   }
+      //   else if (/main.jpg/i.test(item)) {
+      //     obj.mainImage = item;
+      //   }
+      //   else {
+      //     obj.miscImages.push(item);
+      //   }
+      // });
 
-      allData[1].forEach(function (item) {
-        obj.otherFiles.push(item);
-      });
+      // allData[1].forEach(item => {
+      //   obj.otherFiles.push(item);
+      // });
 
-      var completeData = Object.assign(data, obj);
+      // const completeData = Object.assign(data, obj);
       // Update Cache
-      dataCache[data.OBJECTID] = completeData;
+      // dataCache[data.OBJECTID] = completeData;
       // Update Info
-      appendInfo(completeData);
-      showInfoWindow();
+      // appendInfo(completeData);
+      // showInfoWindow();
     }).catch(function (error) {
       console.log(error);
       // Update Cache
-      dataCache[data.OBJECTID] = data;
+      // dataCache[data.OBJECTID] = data;
       // Update Info
-      appendInfo(data);
-      showInfoWindow();
+      // appendInfo(data);
+      // showInfoWindow();
     });
     stateMap.previousActiveProject = data.OBJECTID;
   };

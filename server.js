@@ -28,8 +28,6 @@ app.get('/resources/images/:layer/:id', function(req, res) {
     Delimiter: '/',
     Prefix: `welfare/${req.params.layer}/${req.params.id}/Photo/`
   };
-  // console.log(req.params.layer);
-  // console.log(req.params.id);
 
   s3.listObjects(s3Params, function(err, data) {
     if (err) {
@@ -38,7 +36,6 @@ app.get('/resources/images/:layer/:id', function(req, res) {
     data.Contents.forEach(function(file) {
       images.push(file.Key);
     });
-    console.log(images);
     sendResponse(images);
   });
 
@@ -46,55 +43,28 @@ app.get('/resources/images/:layer/:id', function(req, res) {
     res.json({ data: results});
     res.end();
   }
-
-  // fs.readdir(fullpath, function(err, data) {
-  //   // If direcotry doesn't exist
-  //   if (err) {
-  //     console.error('There was an error reading the file!', err);
-  //     sendResponse();
-  //     return;
-  //   }
-  //   // Otherwise handle data
-  //   data.forEach(function(file) {
-  //     file = path + '/' + file;
-  //     results.push(file);
-  //   });
-  //   sendResponse(results);
-  // });
 });
 app.get('/resources/other/:layer/:id', function(req, res) {
+  const others = [];
   const s3Params = {
     Bucket: process.env.S3_BUCKET_NAME,
     Delimiter: '/',
-    Prefix: `welfare/${req.params.layer}/${req.params.id}/Misc`
+    Prefix: `welfare/${req.params.layer}/${req.params.id}/Misc/`
   };
   s3.listObjects(s3Params, function(err, data) {
     if (err) {
       console.error('There was an error reading the file!', err);
     }
-    console.log(data.Contents);
-    sendResponse(data.Contents);
+    data.Contents.forEach(function(file) {
+      others.push(file.Key);
+    });
+    sendResponse(others);
   });
 
   function sendResponse(results) {
     res.json({ data: results});
     res.end();
   }
-  //
-  // fs.readdir(fullpath, function(err, data) {
-  //   // If direcotry doesn't exist
-  //   if (err) {
-  //     console.error('There was an error reading the file!', err);
-  //     sendResponse();
-  //     return;
-  //   }
-  //   // Otherwise handle data
-  //   data.forEach(function(file) {
-  //     file = path + '/' + file;
-  //     results.push(file);
-  //   });
-  //   sendResponse(results);
-  // });
 });
 
 app.listen(port);

@@ -1,5 +1,13 @@
-.DS_Store
-bower_components
+# Node
 node_modules
 npm-debug.log
+
+#bower
+bower_components
+
+# Local
+.DS_Store
+*.env
+
+#other
 resources

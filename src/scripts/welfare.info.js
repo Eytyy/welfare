@@ -105,13 +105,10 @@ welfare.info = (() => {
       const url = `resources/images/${activeLayer}/${data.ukey}`;
       const req = new XMLHttpRequest();
 
-      console.log('called fetch');
-
       return new Promise((resolve, reject) => {
         req.open('GET', url);
 
         req.onload = () => {
-          console.log('loaded');
           const files = JSON.parse(req.response).data;
           if (!files) { reject('doesn\'t have images'); }
           else { resolve(files); }
@@ -139,48 +136,47 @@ welfare.info = (() => {
 
     // Fetch Project Images
     const images = fetchImages();
-    // const others = fetchExtraResources();
+    const others = fetchExtraResources();
 
-    Promise.all([images]).then(allData => {
+    Promise.all([images, others]).then(allData => {
       const obj = {
         miscImages: [],
         otherFiles: [],
       };
       console.log(allData);
-      console.log('yo');
 
-      allData[0].forEach(item => {
-        if (/before.jpg/i.test(item)) {
-          obj.beforeImage = item;
-        }
-        else if (/after.jpg/i.test(item)) {
-          obj.afterImage = item;
-        }
-        else if (/main.jpg/i.test(item)) {
-          obj.mainImage = item;
-        }
-        else {
-          obj.miscImages.push(item);
-        }
-      });
+      // allData[0].forEach(item => {
+      //   if (/before.jpg/i.test(item)) {
+      //     obj.beforeImage = item;
+      //   }
+      //   else if (/after.jpg/i.test(item)) {
+      //     obj.afterImage = item;
+      //   }
+      //   else if (/main.jpg/i.test(item)) {
+      //     obj.mainImage = item;
+      //   }
+      //   else {
+      //     obj.miscImages.push(item);
+      //   }
+      // });
 
-      allData[1].forEach(item => {
-        obj.otherFiles.push(item);
-      });
+      // allData[1].forEach(item => {
+      //   obj.otherFiles.push(item);
+      // });
 
-      const completeData = Object.assign(data, obj);
+      // const completeData = Object.assign(data, obj);
       // Update Cache
-      dataCache[data.OBJECTID] = completeData;
+      // dataCache[data.OBJECTID] = completeData;
       // Update Info
-      appendInfo(completeData);
-      showInfoWindow();
+      // appendInfo(completeData);
+      // showInfoWindow();
     }).catch(error => {
       console.log(error);
       // Update Cache
-      dataCache[data.OBJECTID] = data;
+      // dataCache[data.OBJECTID] = data;
       // Update Info
-      appendInfo(data);
-      showInfoWindow();
+      // appendInfo(data);
+      // showInfoWindow();
     });
     stateMap.previousActiveProject = data.OBJECTID;
   };
