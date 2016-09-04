@@ -22,6 +22,7 @@ app.get('/', function(req, res) {
   res.end();
 });
 app.get('/resources/images/:layer/:id', function(req, res) {
+  const images = [];
   const s3Params = {
     Bucket: process.env.S3_BUCKET_NAME,
     Delimiter: '/',
@@ -34,11 +35,11 @@ app.get('/resources/images/:layer/:id', function(req, res) {
     if (err) {
       console.error('There was an error reading the file!', err);
     }
-    // data.Contents.forEach(function(file) {
-    //   console.log(file.Key);
-    // });
-    // console.log(data.Contents);
-    sendResponse(data.Contents);
+    data.Contents.forEach(function(file) {
+      images.push(file.Key);
+    });
+    console.log(images);
+    sendResponse(images);
   });
 
   function sendResponse(results) {

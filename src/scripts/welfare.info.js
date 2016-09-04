@@ -105,10 +105,13 @@ welfare.info = (() => {
       const url = `resources/images/${activeLayer}/${data.ukey}`;
       const req = new XMLHttpRequest();
 
+      console.log('called fetch');
+
       return new Promise((resolve, reject) => {
         req.open('GET', url);
 
         req.onload = () => {
+          console.log('loaded');
           const files = JSON.parse(req.response).data;
           if (!files) { reject('doesn\'t have images'); }
           else { resolve(files); }
