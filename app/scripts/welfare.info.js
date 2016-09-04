@@ -105,10 +105,13 @@ welfare.info = function () {
       var url = 'resources/images/' + activeLayer + '/' + data.ukey;
       var req = new XMLHttpRequest();
 
+      console.log('called fetch');
+
       return new Promise(function (resolve, reject) {
         req.open('GET', url);
 
         req.onload = function () {
+          console.log('loaded');
           var files = JSON.parse(req.response).data;
           if (!files) {
             reject('doesn\'t have images');
@@ -142,13 +145,15 @@ welfare.info = function () {
 
     // Fetch Project Images
     var images = fetchImages();
-    var others = fetchExtraResources();
+    // const others = fetchExtraResources();
 
-    Promise.all([images, others]).then(function (allData) {
+    Promise.all([images]).then(function (allData) {
       var obj = {
         miscImages: [],
         otherFiles: []
       };
+      console.log(allData);
+      console.log('yo');
 
       allData[0].forEach(function (item) {
         if (/before.jpg/i.test(item)) {
