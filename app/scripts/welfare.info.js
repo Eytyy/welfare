@@ -149,6 +149,8 @@ welfare.info = function () {
         miscImages: [],
         otherFiles: []
       };
+      console.log('images');
+      console.log(allData[0]);
       allData[0].forEach(function (item, index) {
         if (/before.jpg/i.test(item)) {
           obj.beforeImage = item;
@@ -163,6 +165,8 @@ welfare.info = function () {
         }
       });
 
+      console.log('links');
+      console.log(allData[1]);
       allData[1].forEach(function (item, index) {
         if (!index === 0) {
           obj.otherFiles.push(item);
