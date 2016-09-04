@@ -143,8 +143,8 @@ welfare.info = (() => {
         miscImages: [],
         otherFiles: [],
       };
-      console.log('images');
-      console.log(allData[0]);
+      // console.log('images');
+      // console.log(allData[0]);
       allData[0].forEach((item, index) => {
         if (/before.jpg/i.test(item)) {
           obj.beforeImage = item;
@@ -162,8 +162,8 @@ welfare.info = (() => {
         }
       });
 
-      console.log('links');
-      console.log(allData[1]);
+      // console.log('links');
+      // console.log(allData[1]);
       allData[1].forEach((item, index) => {
         if (index !== 0) {
           obj.otherFiles.push(item);
