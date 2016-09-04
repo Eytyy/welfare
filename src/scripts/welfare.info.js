@@ -143,40 +143,42 @@ welfare.info = (() => {
         miscImages: [],
         otherFiles: [],
       };
-      console.log(allData);
+      allData[0].forEach((item, index) => {
+        if (/before.jpg/i.test(item)) {
+          obj.beforeImage = item;
+        }
+        else if (/after.jpg/i.test(item)) {
+          obj.afterImage = item;
+        }
+        else if (/main.jpg/i.test(item)) {
+          obj.mainImage = item;
+        }
+        else {
+          if (!index === 0) {
+            obj.miscImages.push(item);
+          }
+        }
+      });
 
-      // allData[0].forEach(item => {
-      //   if (/before.jpg/i.test(item)) {
-      //     obj.beforeImage = item;
-      //   }
-      //   else if (/after.jpg/i.test(item)) {
-      //     obj.afterImage = item;
-      //   }
-      //   else if (/main.jpg/i.test(item)) {
-      //     obj.mainImage = item;
-      //   }
-      //   else {
-      //     obj.miscImages.push(item);
-      //   }
-      // });
+      allData[1].forEach((item, index) => {
+        if (!index === 0) {
+          obj.otherFiles.push(item);
+        }
+      });
 
-      // allData[1].forEach(item => {
-      //   obj.otherFiles.push(item);
-      // });
-
-      // const completeData = Object.assign(data, obj);
+      const completeData = Object.assign(data, obj);
       // Update Cache
-      // dataCache[data.OBJECTID] = completeData;
+      dataCache[data.OBJECTID] = completeData;
       // Update Info
-      // appendInfo(completeData);
-      // showInfoWindow();
+      appendInfo(completeData);
+      showInfoWindow();
     }).catch(error => {
       console.log(error);
       // Update Cache
-      // dataCache[data.OBJECTID] = data;
+      dataCache[data.OBJECTID] = data;
       // Update Info
-      // appendInfo(data);
-      // showInfoWindow();
+      appendInfo(data);
+      showInfoWindow();
     });
     stateMap.previousActiveProject = data.OBJECTID;
   };

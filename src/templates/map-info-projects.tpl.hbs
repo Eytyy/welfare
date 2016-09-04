@@ -32,12 +32,12 @@
     <div class="project__mid">
       {{#if this.beforeImage}}
         <div class="image-comp image-comp--before">
-          <img src="{{this.beforeImage}}" alt="{{this.RelatedEnglishTitle}} before image">
+          <img src="https://s3.amazonaws.com/eytyy.com/{{this.beforeImage}}" alt="{{this.RelatedEnglishTitle}} before image">
         </div>
       {{/if}}
       {{#if this.afterImage}}
         <div class="image-comp image-comp--after">
-          <img src="{{this.afterImage}}" alt="{{this.RelatedEnglishTitle}} after image">
+          <img src="https://s3.amazonaws.com/eytyy.com/{{this.afterImage}}" alt="{{this.RelatedEnglishTitle}} after image">
         </div>
       {{/if}}
     </div>
@@ -45,14 +45,14 @@
   <div class="project__bottom">
     {{#if this.miscImages}}
       {{#each this.miscImages}}
-        <img class="misc-image" src="{{this}}" alt="{{this.RelatedEnglishTitle}} misc image">
+        <img class="misc-image" src="https://s3.amazonaws.com/eytyy.com/{{this}}" alt="{{this.RelatedEnglishTitle}} misc image">
       {{/each}}
     {{/if}}
     {{#if this.otherFiles}}
       <ul class="links">
         {{#each this.otherFiles}}
           <li class="links__item">
-            <a href="{{this}}">{{formatFileName this}}</a>
+            <a href="https://s3.amazonaws.com/eytyy.com/{{this}}">{{formatFileName this}}</a>
           </li>
         {{/each}}
       </ul>
