@@ -159,6 +159,8 @@ welfare.info = function () {
         } else if (/main.jpg/i.test(item)) {
           obj.mainImage = item;
         } else {
+          console.log(index);
+          console.log(!index === 0);
           if (!index === 0) {
             obj.miscImages.push(item);
           }
