@@ -14,7 +14,7 @@ templates['map-info-projects.tpl.hbs'] = template({"1":function(container,depth0
 },"4":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "        <div class=\"image-comp image-comp--before\">\n          <img src=\""
+  return "        <div class=\"image-comp image-comp--before\">\n          <img src=\"https://s3.amazonaws.com/eytyy.com/"
     + alias2(alias1((depth0 != null ? depth0.beforeImage : depth0), depth0))
     + "\" alt=\""
     + alias2(alias1((depth0 != null ? depth0.RelatedEnglishTitle : depth0), depth0))
@@ -22,7 +22,7 @@ templates['map-info-projects.tpl.hbs'] = template({"1":function(container,depth0
 },"6":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "        <div class=\"image-comp image-comp--after\">\n          <img src=\""
+  return "        <div class=\"image-comp image-comp--after\">\n          <img src=\"https://s3.amazonaws.com/eytyy.com/"
     + alias2(alias1((depth0 != null ? depth0.afterImage : depth0), depth0))
     + "\" alt=\""
     + alias2(alias1((depth0 != null ? depth0.RelatedEnglishTitle : depth0), depth0))
@@ -34,7 +34,7 @@ templates['map-info-projects.tpl.hbs'] = template({"1":function(container,depth0
 },"9":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "        <img class=\"misc-image\" src=\""
+  return "        <img class=\"misc-image\" src=\"https://s3.amazonaws.com/eytyy.com/"
     + alias2(alias1(depth0, depth0))
     + "\" alt=\""
     + alias2(alias1((depth0 != null ? depth0.RelatedEnglishTitle : depth0), depth0))
@@ -48,7 +48,7 @@ templates['map-info-projects.tpl.hbs'] = template({"1":function(container,depth0
 },"12":function(container,depth0,helpers,partials,data) {
     var alias1=container.escapeExpression;
 
-  return "          <li class=\"links__item\">\n            <a href=\""
+  return "          <li class=\"links__item\">\n            <a href=\"https://s3.amazonaws.com/eytyy.com/"
     + alias1(container.lambda(depth0, depth0))
     + "\">"
     + alias1((helpers.formatFileName || (depth0 && depth0.formatFileName) || helpers.helperMissing).call(depth0 != null ? depth0 : {},depth0,{"name":"formatFileName","hash":{},"data":data}))
