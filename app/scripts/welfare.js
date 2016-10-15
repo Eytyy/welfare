@@ -6,7 +6,7 @@ var welfare = function () {
       id: 1,
       name: 'projects',
       title: 'Our Projects',
-      url: 'data/our-projects.json',
+      url: 'data/our-projects2.json',
       data: null
     },
     buildings: {

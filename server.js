@@ -15,8 +15,6 @@ AWS.config.update({
   secretAccessKey: process.env.AWSSecretKey
 });
 
-console.log(process.env);
-
 const s3 = new AWS.S3();
 
 app.use(express.static('app'));

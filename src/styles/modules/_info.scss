@@ -11,7 +11,7 @@
   color: #FFF;
 }
 .js-view-mode {
-  transform: translate3d(0, -450px, 0);
+  transform: translate3d(0, -400px, 0);
   opacity: 1;
   .map-info__grabber {
     opacity: 1;
@@ -110,7 +110,7 @@
   padding-top: 2em;
 }
 .project__details__item {
-  margin-bottom: 3em;
+  margin-bottom: 4.1em;
 }
 .details__item__label {
   color: $red;
@@ -140,18 +140,19 @@ img {
   position: relative;
   &--before:after,
   &--after:before {
+    font-family: $font__light;
     display: block;
     position: absolute;
     left: 50%;
     z-index: 2;
     transform: translateX(-50%);
-    font-size: 140px;
+    font-size: 130px;
     line-height: 1;
     text-transform: uppercase;
     color: #FFF;
   }
   &--before {
-    padding-top: 27.2%;
+    height: 40vh;
     &:before {
       content: "";
       display: block;
@@ -166,15 +167,15 @@ img {
     }
     &:after {
       content: "Before";
-      bottom: -35px;
+      bottom: -29px;
     }
   }
   &--after {
-    padding-top: 54.4%;
+    height: 60vh;
     &:before {
       content: "After";
       z-index: 2;
-      top: -18px;
+      top: -15px;
     }
   }
   img {

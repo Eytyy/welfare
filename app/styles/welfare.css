@@ -218,8 +218,8 @@ body, html, main, #welfare, #map {
   color: #FFF; }
 
 .js-view-mode {
-  -webkit-transform: translate3d(0, -450px, 0);
-          transform: translate3d(0, -450px, 0);
+  -webkit-transform: translate3d(0, -400px, 0);
+          transform: translate3d(0, -400px, 0);
   opacity: 1; }
   .js-view-mode .map-info__grabber {
     opacity: 1; }
@@ -320,7 +320,7 @@ body, html, main, #welfare, #map {
   padding-top: 2em; }
 
 .project__details__item {
-  margin-bottom: 3em; }
+  margin-bottom: 4.1em; }
 
 .details__item__label {
   color: #BE4459;
@@ -349,18 +349,19 @@ img {
   overflow: hidden;
   position: relative; }
   .image-comp--before:after, .image-comp--after:before {
+    font-family: "FiraSans-Light";
     display: block;
     position: absolute;
     left: 50%;
     z-index: 2;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
-    font-size: 140px;
+    font-size: 130px;
     line-height: 1;
     text-transform: uppercase;
     color: #FFF; }
   .image-comp--before {
-    padding-top: 27.2%; }
+    height: 40vh; }
     .image-comp--before:before {
       content: "";
       display: block;
@@ -375,13 +376,13 @@ img {
               transform: translateX(-50%); }
     .image-comp--before:after {
       content: "Before";
-      bottom: -35px; }
+      bottom: -29px; }
   .image-comp--after {
-    padding-top: 54.4%; }
+    height: 60vh; }
     .image-comp--after:before {
       content: "After";
       z-index: 2;
-      top: -18px; }
+      top: -15px; }
   .image-comp img {
     position: absolute;
     top: 50%;
