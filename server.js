@@ -8,10 +8,14 @@ const AWS = require('aws-sdk');
 const port = process.env.PORT || 3000;
 const router = express.Router();
 
+require('dotenv').config();
+
 AWS.config.update({
   accessKeyId: process.env.AWSAccessKeyId,
   secretAccessKey: process.env.AWSSecretKey
 });
+
+console.log(process.env);
 
 const s3 = new AWS.S3();
 
